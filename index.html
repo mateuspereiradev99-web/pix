@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contribua via PIX</title>
+
+<style>
+
+:root{
+    --bg:#030712;
+    --card:rgba(255,255,255,.07);
+    --border:rgba(255,255,255,.08);
+
+    --text:#ffffff;
+    --text-secondary:#94a3b8;
+
+    --green:#22c55e;
+    --green-light:#4ade80;
+}
+
+.light{
+    --bg:#f4fdf7;
+    --card:rgba(255,255,255,.60);
+    --border:rgba(255,255,255,.80);
+
+    --text:#0f172a;
+    --text-secondary:#64748b;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* ===========================
+   BACKGROUND
+=========================== */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    overflow:hidden;
+}
+
+.aurora{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(120px);
+}
+
+.a1{
+    width:500px;
+    height:500px;
+
+    background:#00ff8840;
+
+    top:-100px;
+    left:-100px;
+
+    animation:move1 15s infinite ease-in-out;
+}
+
+.a2{
+    width:400px;
+    height:400px;
+
+    background:#22c55e40;
+
+    right:-100px;
+    top:20%;
+
+    animation:move2 18s infinite ease-in-out;
+}
+
+.a3{
+    width:350px;
+    height:350px;
+
+    background:#00c85340;
+
+    bottom:-80px;
+    left:40%;
+
+    animation:move3 22s infinite ease-in-out;
+}
+
+.grid{
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.02) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.02) 1px,
+            transparent 1px
+        );
+
+    background-size:40px 40px;
+
+    mask-image:
+    radial-gradient(
+        circle at center,
+        black,
+        transparent 90%
+    );
+}
+
+/* particles */
+
+.particle{
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:white;
+
+    border-radius:50%;
+
+    opacity:.4;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 20px #22c55e;
+
+    animation:float 12s linear infinite;
+}
+
+@keyframes float{
+
+    from{
+        transform:
+        translateY(110vh)
+        scale(0);
+
+        opacity:0;
+    }
+
+    20%{
+        opacity:.5;
+    }
+
+    80%{
+        opacity:.5;
+    }
+
+    to{
+        transform:
+        translateY(-100px)
+        scale(1.5);
+
+        opacity:0;
+    }
+}
+
+@keyframes move1{
+    50%{
+        transform:
+        translate(100px,100px);
+    }
+}
+
+@keyframes move2{
+    50%{
+        transform:
+        translate(-120px,120px);
+    }
+}
+
+@keyframes move3{
+    50%{
+        transform:
+        translateY(-100px);
+    }
+}
+
+/* ===========================
+   APP
+=========================== */
+
+.container{
+    max-width:430px;
+    margin:auto;
+    padding:24px;
+}
+
+.theme-switch{
+
+    display:flex;
+    justify-content:center;
+    gap:12px;
+
+    margin-top:10px;
+    margin-bottom:30px;
+}
+
+.theme-btn{
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    color:var(--text);
+
+    cursor:pointer;
+}
+
+.theme-btn.active{
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--green),
+        var(--green-light)
+    );
+
+    color:white;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.hero h1{
+    font-size:42px;
+    font-weight:800;
+}
+
+.hero p{
+    margin-top:10px;
+    color:var(--text-secondary);
+}
+
+.cards{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(40px);
+
+    border-radius:28px;
+
+    padding:22px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.20);
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:200px;
+    height:200px;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(34,197,94,.15),
+        transparent 70%
+    );
+
+    top:-100px;
+    right:-100px;
+}
+
+.label{
+
+    color:var(--green-light);
+
+    font-weight:700;
+
+    margin-bottom:10px;
+}
+
+.key{
+
+    margin-bottom:18px;
+
+    word-break:break-all;
+
+    line-height:1.6;
+}
+
+.copy-btn{
+
+    width:100%;
+
+    border:none;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--green),
+        var(--green-light)
+    );
+}
+
+.footer{
+
+    margin-top:50px;
+
+    text-align:center;
+}
+
+.logo{
+
+    width:90px;
+
+    margin-bottom:12px;
+}
+
+.footer p{
+    color:var(--text-secondary);
+}
+
+.toast{
+
+    position:fixed;
+
+    bottom:30px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--green),
+        var(--green-light)
+    );
+
+    color:white;
+
+    padding:14px 22px;
+
+    border-radius:999px;
+
+    opacity:0;
+
+    transition:.3s;
+}
+
+.toast.show{
+    opacity:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background">
+
+    <div class="aurora a1"></div>
+    <div class="aurora a2"></div>
+    <div class="aurora a3"></div>
+
+    <div class="grid"></div>
+
+</div>
+
+<div class="container">
+
+    <div class="theme-switch">
+
+        <button
+            class="theme-btn active"
+            onclick="setTheme('dark',this)">
+            🌙 Dark
+        </button>
+
+        <button
+            class="theme-btn"
+            onclick="setTheme('light',this)">
+            ☀️ Light
+        </button>
+
+    </div>
+
+    <div class="hero">
+
+        <h1>💚 Contribua</h1>
+
+        <p>
+            Escolha uma das chaves PIX abaixo
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="label">PIX Celular</div>
+
+            <div class="key">
+                (16) 99999-9999
+            </div>
+
+            <button
+                class="copy-btn"
+                onclick="copyPix('(16)999999999')">
+
+                Copiar Chave
+
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <div class="label">PIX E-mail</div>
+
+            <div class="key">
+                pix@empresa.com.br
+            </div>
+
+            <button
+                class="copy-btn"
+                onclick="copyPix('pix@empresa.com.br')">
+
+                Copiar Chave
+
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <div class="label">PIX Aleatória</div>
+
+            <div class="key">
+                123e4567-e89b-12d3-a456-426614174000
+            </div>
+
+            <button
+                class="copy-btn"
+                onclick="copyPix('123e4567-e89b-12d3-a456-426614174000')">
+
+                Copiar Chave
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+
+        <img
+            src="logo.png"
+            class="logo">
+
+        <p>
+            Obrigado pelo apoio 💚
+        </p>
+
+    </div>
+
+</div>
+
+<div class="toast" id="toast">
+    Chave PIX copiada!
+</div>
+
+<script>
+
+/* modo dark padrão */
+
+document.body.classList.remove("light");
+
+/* partículas */
+
+for(let i=0;i<25;i++){
+
+    const p =
+    document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left =
+    Math.random()*100+"%";
+
+    p.style.animationDelay =
+    Math.random()*12+"s";
+
+    p.style.animationDuration =
+    (10 + Math.random()*10)+"s";
+
+    document
+    .querySelector(".background")
+    .appendChild(p);
+}
+
+function copyPix(value){
+
+    navigator.clipboard.writeText(value);
+
+    const toast =
+    document.getElementById("toast");
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },2000);
+}
+
+function setTheme(theme,button){
+
+    if(theme==="light"){
+        document.body.classList.add("light");
+    }else{
+        document.body.classList.remove("light");
+    }
+
+    document
+    .querySelectorAll(".theme-btn")
+    .forEach(btn =>
+        btn.classList.remove("active")
+    );
+
+    button.classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
